@@ -101,7 +101,9 @@ const Contract = () => {
         
       </div>
       <div className="mt-5 flex w-full justify-center gap-5">
-        <Button>
+        <Button
+          onClick={handleSubmit}
+        >
           Continue
         </Button>
         <Button
