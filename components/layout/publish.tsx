@@ -1,10 +1,11 @@
+// publish.tsx
 "use client";
 
 import Stage from "./contract/stage";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-const Publish = () => {
+const PublishContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [address, setAddress] = useState<string>("");
@@ -33,7 +34,24 @@ const Publish = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+const Publish = () => {
+  return (
+    <Suspense fallback={
+      <div className="bg-gray-100 w-full h-screen overflow-hidden flex flex-col items-center justify-center px-3">
+        <div className="bg-gray-100 w-full h-full md:w-lg mx-auto py-10">
+          <div className="flex flex-col gap-2 items-center justify-center">
+            <p className="text-2xl font-bold">Verify & Publish Contract Source Code</p>
+            <p className="text-sm text-gray-500 text-center">Loading...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <PublishContent />
+    </Suspense>
+  );
+};
 
 export default Publish;
