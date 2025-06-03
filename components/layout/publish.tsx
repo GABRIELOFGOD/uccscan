@@ -26,6 +26,11 @@ const Publish = () => {
           <p className="text-sm text-gray-500 text-center">Source code verification provides transparency for users interacting with smart contracts. By uploading the source code, BscScan will match the compiled code with that on the blockchain. Read more.</p>
         </div>
         <Stage stage="publish" />
+        <div>
+          <div className="flex  flex-col gap-5 bg-white w-full shadow-sm border border-border/80 rounded-lg p-3">
+            <p className="text-lg font-semibold">We are checking for {address} on the blockchain</p>
+          </div>
+        </div>
       </div>
     </div>
   )
