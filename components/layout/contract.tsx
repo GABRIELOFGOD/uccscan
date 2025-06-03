@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Contract = () => {
   const router = useRouter();
@@ -18,7 +19,9 @@ const Contract = () => {
 
   const handleSubmit = () => {
     if (!contractAddress) {
-      toast
+      toast.error('Enter Address')
+      return;
+    }
     router.push(`/verifyContract?address=${contractAddress}`);
   }
   
