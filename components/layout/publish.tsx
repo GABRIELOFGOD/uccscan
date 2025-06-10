@@ -9,14 +9,25 @@ const PublishContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [address, setAddress] = useState<string>("");
+  const [compilerVersion, setCompilerVersion] = useState<string>("");
+  const [compilerType, setCompilerType] = useState<string>("");
+  const [licenseType, setLicenseType] = useState<string>("");
 
   useEffect(() => {
     const contractAddress = searchParams.get("address");
-    if (!contractAddress) {
+    const version = searchParams.get("v");
+    const compilerType = searchParams.get("t");
+    const licenseType = searchParams.get("l");
+
+    if (!contractAddress || contractAddress.trim() === "" || !version || version.trim() === "" || !compilerType || compilerType === "default" || !licenseType || licenseType === "default") {
       router.back();
       return;
     }
     setAddress(contractAddress);
+    setCompilerVersion(version);
+    setCompilerType(compilerType);
+    setLicenseType(licenseType);
+    
   }, [searchParams, router]);
 
   return (
@@ -30,6 +41,11 @@ const PublishContent = () => {
         <div>
           <div className="flex  flex-col gap-5 bg-white w-full shadow-sm border border-border/80 rounded-lg p-3">
             <p className="text-lg font-semibold">We are checking for {address} on the blockchain</p>
+            <p className="text-sm text-gray-500">This may take a few seconds...</p>
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-gray-500">Contract Address: <span className="font-semibold">{address}</span></p>
+              <p className="text-sm text-gray-500">Compiler Version: <span className="font-semibold">{compilerVersion}</span></p>
+            </div>
           </div>
         </div>
       </div>
